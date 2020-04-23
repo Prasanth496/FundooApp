@@ -5,11 +5,14 @@ import org.junit.Test
 
 class UserTest {
 
-    // testcase when both email and password are empty
+    // function for null check
     @Test
-    fun givenEmailAndPassword_WhenNull_ShouldReturnFalse() {
-        val email = null
-        val password = null
-        Assert.assertTrue(email == password)
+    fun givenUserOneAndNull_WhenEquals_ShouldNotBeEqual() {
+        val userOne = Userlogin(email = "pavan123@gmail.com", password = "pavan@123")
+        val userTwo = null
+        Assert.assertFalse(userOne == userTwo)
     }
+
+
+
 }
