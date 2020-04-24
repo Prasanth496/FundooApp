@@ -12,4 +12,11 @@ class RegisterTest {
         val userTwo = null
         Assert.assertFalse(userOne == userTwo)
     }
+
+    @Test
+    // function for reference check
+    fun givenSameUser_WhenEquals_ShouldBeEqual() {
+        val userOne = RegisterModel(firstname = "Pavan",lastname = "Kumar",username = "pavan123@gmail.com",password="pavan@123")
+        Assert.assertTrue(userOne.equals(userOne))
+    }
 }
