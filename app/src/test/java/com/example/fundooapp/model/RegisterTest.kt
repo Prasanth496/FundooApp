@@ -19,4 +19,12 @@ class RegisterTest {
         val userOne = RegisterModel(firstname = "Pavan",lastname = "Kumar",username = "pavan123@gmail.com",password="pavan@123")
         Assert.assertTrue(userOne.equals(userOne))
     }
+
+    @Test
+    // function when password length is greater than three
+    fun givenUserOneAndUserTwo_WhenPasswordLengthGreaterThanThree_ShouldBeEqual() {
+        val userOne = RegisterModel(firstname = "Pavan",lastname = "Kumar",username = "pavan123@gmail.com",password="pavan@123")
+        val userTwo = RegisterModel(firstname = "Ravi",lastname = "Krishna",username = "ravi123@gmail.com",password="ravi@123")
+        Assert.assertTrue(userOne.equals(userOne))
+    }
 }
