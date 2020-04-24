@@ -31,9 +31,16 @@ class UserTest {
     @Test
     // function for value and string check
     fun givenUserOneAndString_WhenEquals_ShouldNotBeEqual() {
-        val userOne = LoginModel(email = "pavan123@gmail.com",password = "pavam@123")
+        val userOne = LoginModel(email = "pavan123@gmail.com", password = "pavam@123")
         val userTwo = "Ravi"
         Assert.assertFalse(userOne.equals(userTwo))
+    }
 
+    @Test
+    //function for value are not equal check
+    fun givenUserOneAndUserTwoWithDifferentDetails_Whenequals_ShouldNotBeEqual() {
+        val userOne = LoginModel(email = "pavan123@gmail.com", password = "pavan@123")
+        val userTwo = LoginModel(email = "ravi234@gmail.com", password = "ravi@123")
+        Assert.assertFalse(userOne.equals(userTwo))
     }
 }
