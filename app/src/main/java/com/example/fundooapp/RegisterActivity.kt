@@ -2,6 +2,7 @@ package com.example.fundooapp
 
 import android.R
 import android.os.Bundle
+import android.os.Handler
 import android.util.Patterns
 import android.view.View
 import android.widget.Button
@@ -9,6 +10,7 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.Nullable
 import androidx.appcompat.app.AppCompatActivity
+import com.example.fundooapp.model.User
 
 
 class RegisterActivity : AppCompatActivity() {
@@ -43,8 +45,8 @@ class RegisterActivity : AppCompatActivity() {
                     val Email = editTextEmail!!.text.toString()
                     val Password = editTextPassword!!.text.toString()
                     //Check in the database is there any user associated with  this email
-                    if (!sqliteHelper.isEmailExists(Email)) { //Email does not exist now add new user to database
-                        sqliteHelper.addUser(User(null, UserName, Email, Password))
+                    if (!sqliteHelper!!.isEmailExists(Email)) { //Email does not exist now add new user to database
+                        sqliteHelper!!.addUser(User(null, UserName, Email, Password))
                         Snackbar.make(
                             buttonRegister,
                             "User created successfully! Please Login ",
