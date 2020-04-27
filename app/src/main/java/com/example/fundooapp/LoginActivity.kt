@@ -39,8 +39,9 @@ class LoginActivity : AppCompatActivity() {
         initViews()
         //set click event of login button
         buttonLogin?.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(view: View?) { //Check user input is correct or not
-                if (validate()) { //Get values from EditText fields
+
+            override fun onClick(view: View?) {
+                if (validate()) {              //Get values from EditText fields
                     val Email = editTextEmail!!.text.toString()
                     val Password = editTextPassword!!.text.toString()
                     //Authenticate user
@@ -51,10 +52,7 @@ class LoginActivity : AppCompatActivity() {
                         Snackbar.make(buttonLogin, "Successfully Logged in!", Snackbar.LENGTH_LONG)
                             .show()
                         //User Logged in Successfully Launch You home screen activity
-    /* Intent intent=new Intent(LoginActivity.this,HomeScreenActivity.class);
-                            startActivity(intent);
-                            finish();*/
-                    } else { //User Logged in Failed
+                    } else {                     //User Logged is Failed
                         Snackbar.make(
                             buttonLogin,
                             "Failed to log in , please try again",
