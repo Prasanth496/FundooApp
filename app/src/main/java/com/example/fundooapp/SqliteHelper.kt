@@ -10,10 +10,10 @@ import com.sun.xml.internal.bind.v2.schemagen.Util.equalsIgnoreCase
 import javax.swing.UIManager.put
 
 
-class SqliteHelper : SQLiteOpenHelper {
+class SqliteHelper : SQLiteOpenHelper() {
 
     //DATABASE NAME
-    val DATABASE_NAME = "loopwiki.com"
+    val DATABASE_NAME = "userlist"
 
     //DATABASE VERSION
     val DATABASE_VERSION = 1

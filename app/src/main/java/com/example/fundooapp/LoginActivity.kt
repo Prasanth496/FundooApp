@@ -2,17 +2,14 @@ package com.example.fundooapp
 
 import android.R
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
-import android.text.Html
-import android.text.Spanned
 import android.util.Patterns
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.fundooapp.model.LoginModel
+import com.example.fundooapp.model.User
 
 
 class LoginActivity : AppCompatActivity() {
@@ -45,8 +42,8 @@ class LoginActivity : AppCompatActivity() {
                     val Email = editTextEmail!!.text.toString()
                     val Password = editTextPassword!!.text.toString()
                     //Authenticate user
-                    val currentUser: LoginModel =
-                        sqliteHelper!!.Authenticate(LoginModel(email,password))
+                    val currentUser: User? =
+                        sqliteHelper!!.Authenticate(User(email,password))
                     //Check Authentication is successful or not
                     if (currentUser != null) {
                         Snackbar.make(buttonLogin, "Successfully Logged in!", Snackbar.LENGTH_LONG)
