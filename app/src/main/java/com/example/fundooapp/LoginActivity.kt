@@ -1,6 +1,5 @@
 package com.example.fundooapp
 
-import android.R
 import android.content.Intent
 import android.os.Bundle
 import android.util.Patterns
@@ -9,7 +8,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.example.fundooapp.model.DatabaseHelper
 import com.example.fundooapp.model.User
+import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 
 class LoginActivity : AppCompatActivity() {
@@ -26,12 +29,12 @@ class LoginActivity : AppCompatActivity() {
     var buttonLogin: Button? = null
 
     //Declaring SqliteHelper
-    var sqliteHelper: SqliteHelper? = null
+    var sqliteHelper: DatabaseHelper? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        sqliteHelper = SqliteHelper(this)
+        sqliteHelper = DatabaseHelper(this)
         initCreateAccountTextView()
         initViews()
         //set click event of login button
@@ -43,15 +46,16 @@ class LoginActivity : AppCompatActivity() {
                     val Password = editTextPassword!!.text.toString()
                     //Authenticate user
                     val currentUser: User? =
-                        sqliteHelper!!.Authenticate(User(email,password))
+                        DatabaseHelper.authenticate(User)
                     //Check Authentication is successful or not
                     if (currentUser != null) {
-                        Snackbar.make(buttonLogin, "Successfully Logged in!", Snackbar.LENGTH_LONG)
+                        Snackbar.make(buttonLogin!!, "Successfully Logged in!", Snackbar.LENGTH_LONG)
                             .show()
-                        //User Logged in Successfully Launch You home screen activity
-                    } else {                     //User Logged is Failed
+
+                    }
+                    else {                     //User Logged is Failed
                         Snackbar.make(
-                            buttonLogin,
+                            buttonLogin!!,
                             "Failed to log in , please try again",
                             Snackbar.LENGTH_LONG
                         ).show()
@@ -64,7 +68,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun initCreateAccountTextView() {
         val textViewCreateAccount = findViewById(R.id.textViewCreateAccount) as TextView
-        textViewCreateAccount.setOnClickListener(object : View.OnClickListener() {
+        textViewCreateAccount.setOnClickListener(object : View.OnClickListener {
             override fun onClick(view: View?) {
                 val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
                 startActivity(intent)
@@ -74,11 +78,11 @@ class LoginActivity : AppCompatActivity() {
 
     //this method is used to connect XML views to its Objects
     private fun initViews() {
-        editTextEmail = findViewById(R.id.editTextEmail) as EditText
-        editTextPassword = findViewById(R.id.editTextPassword) as EditText
+        editTextEmail = findViewById(R.id.editTextEmail) as TextInputEditText
+        editTextPassword = findViewById(R.id.editTextPassword) as TextInputEditText
         textInputLayoutEmail = findViewById(R.id.textInputLayoutEmail) as TextInputLayout?
         textInputLayoutPassword = findViewById(R.id.textInputLayoutPassword) as TextInputLayout?
-        buttonLogin = findViewById(R.id.login) as Button?
+        buttonLogin = findViewById(R.id.buttonLogin) as Button?
     }
 
 
@@ -92,23 +96,23 @@ class LoginActivity : AppCompatActivity() {
         //Handling validation for Email field
         if (!Patterns.EMAIL_ADDRESS.matcher(Email).matches()) {
             valid = false
-            textInputLayoutEmail.setError("Please enter valid email!")
+            textInputLayoutEmail?.setError("Please enter valid email!")
         } else {
             valid = true
-            textInputLayoutEmail.setError(null)
+            textInputLayoutEmail?.setError(null)
         }
 
         //Handling validation for Password field
         if (Password.isEmpty()) {
             valid = false
-            textInputLayoutPassword.setError("Please enter valid password!")
+            textInputLayoutPassword?.setError("Please enter valid password!")
         } else {
             if (Password.length > 5) {
                 valid = true
-                textInputLayoutPassword.setError(null)
+                textInputLayoutPassword?.setError(null)
             } else {
                 valid = false
-                textInputLayoutPassword.setError("Password is to short!")
+                textInputLayoutPassword?.setError("Password is to short!")
             }
         }
         return valid
