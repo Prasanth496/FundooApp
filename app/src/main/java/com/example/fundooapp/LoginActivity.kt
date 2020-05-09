@@ -46,7 +46,7 @@ class LoginActivity : AppCompatActivity() {
                     val Password = editTextPassword!!.text.toString()
                     //Authenticate user
                     val currentUser: User? =
-                        DatabaseHelper.authenticate(User)
+                        DatabaseHelper.authenticate(User(Email,Password))
                     //Check Authentication is successful or not
                     if (currentUser != null) {
                         Snackbar.make(buttonLogin!!, "Successfully Logged in!", Snackbar.LENGTH_LONG)
@@ -63,6 +63,10 @@ class LoginActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    private fun User(Email: String, Password: String): User {
+        return User(Email, Password)
     }
 
 

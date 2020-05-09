@@ -100,6 +100,10 @@ class DatabaseHelper constructor(context: Context?) :
         } else false
     }
 
+    fun isEmailExists() : Boolean{
+        return true
+    }
+
     companion object {
         fun authenticate(user: User) : User? {
             user.email
